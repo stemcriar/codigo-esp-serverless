@@ -4,42 +4,42 @@
 #include <ArduinoJson.h>
 #include <Arduino.h>
 
-class Serial_comm{
-  private:
-  
-    long previousMillis = 0; 
-    long interval = 1000;  // (em milissegundos) -> define o tempo de "delay"
-    String type = "0";
-    String response = "0";
-    String receivedType = "";
+class Serial_comm
+{
+private:
+  long previousMillis = 0;
+  long interval = 1000; // (em milissegundos) -> define o tempo de "delay"
+  String type = "0";
+  String response = "0";
+  String receivedType = "";
 
-  public:
-    Serial_comm();
-    ~Serial_comm();
-    
-    StaticJsonDocument<100> docFromSerial;
+public:
+  Serial_comm();
+  ~Serial_comm();
 
-    String from = "";
-    String state = "";
+  StaticJsonDocument<100> docFromSerial;
 
-    String serializedCurrentJson;
+  String from = "";
+  String state = "";
 
-    bool jsonUpdated = false;
-    
-    void getJson();
-    void sendJson(String from, String state);
-    void serializeCurrentJson();
-    bool jsonUpdateCheck();
-    void handleIncomingJson(String jsonStr);
+  String serializedCurrentJson;
 
-    void setHandshakeInterval(long interval);
-    void waitHandshake(String left, String hand, String right, String shake);
-    void doHandshake(String origin, String hand, String destiny);
-    
-    void setType(String type);
-    String getType();
-    String getReceivedType();
-    void printCurrentJson();
+  bool jsonUpdated = false;
+
+  void getJson();
+  void sendJson(String from, String state);
+  void serializeCurrentJson();
+  bool jsonUpdateCheck();
+  void handleIncomingJson(String jsonStr);
+
+  void setHandshakeInterval(long interval);
+  void waitHandshake(String left, String hand, String right, String shake);
+  void doHandshake(String origin, String hand, String destiny);
+
+  void setType(String type);
+  String getType();
+  String getReceivedType();
+  void printCurrentJson();
 };
 
 #endif
