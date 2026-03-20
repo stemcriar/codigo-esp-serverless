@@ -1,19 +1,24 @@
 #ifndef WIFI_H
 #define WIFI_H
 
-#include <ESP8266WiFi.h>
+#include <ESP8266WiFi.h>        // WiFi
+#include <ESP8266mDNS.h>        // multi DNS
 #include <ESP8266WiFiMulti.h>
 
-class Wifi {
+class WifiManager {
+
   private:
-    ESP8266WiFiMulti wifi;
-
+    ESP8266WiFiMulti wifiMulti;     // Obejto para gerenciar credenciais de rede
+    
   public:
-    Wifi();
+    WifiManager(); //Constructor
+    ~WifiManager();
 
-    void start();
-
-    ~Wifi();
+    String ip = "";
+    
+    void startWiFi();
+    void startMDNS(String mdnsName);
+    void updateMDNS();
 };
 
 #endif
