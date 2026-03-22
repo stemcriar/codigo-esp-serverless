@@ -4,12 +4,12 @@ WifiController::WifiController() : server(80) {};
 
 WifiController::~WifiController() { /* ¯\_(ツ)_/¯ */ }; // Destructor
 
-void WifiController::startWiFi(String ID)
+void WifiController::startWiFi(String id)
 {
   Serial.println("\n\rConnecting");
   WiFiManager wifiManager;
 
-  String apName = "Config-ESP-" + ID;
+  String apName = "Config-ESP-" + id;
 
   delay(500);
   if (!wifiManager.autoConnect(apName.c_str())) {
@@ -50,15 +50,15 @@ void WifiController::updateMDNS()
 
 void WifiController::startWebServer(String id) 
 {
-  this->ID = id;
+  this->id = id;
 
   server.on("/", [this]() {
     String html = "<html><head><meta charset='UTF-8'>";
     html += "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"; 
     html += "<style>body{font-family:sans-serif; text-align:center; padding-top:50px;} input, button{padding:10px; font-size:16px; margin:5px;} button{cursor:pointer; background-color:#4CAF50; color:white; border:none; border-radius:5px;}</style>";
     html += "</head><body>";
-    html += "<h1>Configurações: " + this->ID + "</h1>";
-    html += "<p>O IP atual do Servidor STEM Criar é: <br><strong>" + this->serverIP + "</strong></p>";
+    html += "<h1>Configurações: " + this->id + "</h1>";
+    html += "<p>O IP atual do <strong>Servidor STEM Criar</strong> é: <br><strong>" + this->serverIP + "</strong></p>";
     
     html += "<form action='/salvar_ip' method='POST'>";
     html += "<input type='text' name='novo_ip' placeholder='Digite o novo IP' required>";
@@ -84,26 +84,17 @@ void WifiController::startWebServer(String id)
       
       html += "<h2 style='color: #4CAF50;'>IP do Servidor salvo com sucesso!</h2>";
       html += "<p>O novo IP configurado é: <br><strong style='font-size: 1.2em;'>" + novoIP + "</strong></p>";
-      html += "<p>Tentando reiniciar o protótipo automaticamente...</p>";
       
       html += "<a href='/' class='btn'>Voltar à Página Inicial</a>";
       
       html += "<div class='alerta'>";
-      html += "<strong>⚠️ Atenção:</strong> Aguarde cerca de 5 segundos e clique no botão acima.<br><br>";
-      html += "Se a página inicial não carregar, significa que o reinício automático falhou. Nesse caso, <strong>por favor desligue e volte a ligar o protótipo da energia manualmente</strong> para aplicar o novo IP.";
+      html += "<h3 style='margin-top: 0;'>⚠️ Ação Necessária</h3>";
+      html += "<p>Para que o novo IP entre em vigor, <strong>desligue e ligue " + this->id + "</strong>.</p>";
       html += "</div>";
       
       html += "</body></html>";
       
       this->server.send(200, "text/html", html);
-      
-      delay(1500); 
-      
-      Serial.println("Tentando reiniciar via software...");
-      
-      WiFi.disconnect(true); 
-      delay(500); 
-      ESP.restart();
     } else {
       this->server.send(400, "text/plain", "Erro: IP nao fornecido");
     }

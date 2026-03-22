@@ -15,15 +15,15 @@ void setup()
 
   arduino.doHandshake("ESP", "OK", "ARD");
 
-  String ID = arduino.getReceivedType();
+  String id = arduino.getReceivedType();
 
   Serial.print("The type is: ");
-  Serial.println(ID);
-  setTypeToWs(ID);
+  Serial.println(id);
+  setTypeToWs(id);
 
-  wifi.startWiFi(ID);
-  wifi.startMDNS(ID);
-  wifi.startWebServer(ID);
+  wifi.startWiFi(id);
+  wifi.startMDNS(id);
+  wifi.startWebServer(id);
 
   wifi.loadServerIP();
   Serial.print("IP do Servidor Carregado da Memoria: ");

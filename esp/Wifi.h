@@ -11,7 +11,7 @@ class WifiController
 {
 private:
   ESP8266WebServer server;
-  String ID;
+  String id;
 
 public:
   WifiController(); // Constructor
@@ -20,11 +20,13 @@ public:
   String ip = "";
   String serverIP = "";
 
-  void startWiFi(String ID);
+  void startWiFi(String id);
   void startMDNS(String mdnsName);
   void updateMDNS();
+  
   void startWebServer(String id);
   void handleWebServer();
+
   void loadServerIP();
   void saveServerIP(String newIP);
 };
