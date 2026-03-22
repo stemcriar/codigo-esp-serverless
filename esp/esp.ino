@@ -2,11 +2,10 @@
 #include "webSocketClient.h"
 #include "serial_comm.h"
 
-WifiManager wifi;
+WifiController wifi;
 Serial_comm arduino;
 
-const String ip = "12.1.15.83";
-
+const String ip = "192.168.15.10";
 const int port = 1801;
 
 void setup()

@@ -3,17 +3,13 @@
 
 #include <ESP8266WiFi.h> // WiFi
 #include <ESP8266mDNS.h> // multi DNS
-#include <ESP8266WiFiMulti.h>
+#include <WiFiManager.h>
 
-class WifiManager
+class WifiController
 {
-
-private:
-  ESP8266WiFiMulti wifiMulti; // Obejto para gerenciar credenciais de rede
-
 public:
-  WifiManager(); // Constructor
-  ~WifiManager();
+  WifiController(); // Constructor
+  ~WifiController();
 
   String ip = "";
 

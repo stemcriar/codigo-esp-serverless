@@ -1,21 +1,20 @@
 #include "Wifi.h"
 
-WifiManager::WifiManager()
-{                                                     // Constructor
-  wifiMulti.addAP("STEM-MAKERSPACE", "St3mMK2k24!!"); // adicionar credenciais das redes
-};
+WifiController::WifiController() {};
 
-WifiManager::~WifiManager() { /* ¯\_(ツ)_/¯ */ }; // Destructor
+WifiController::~WifiController() { /* ¯\_(ツ)_/¯ */ }; // Destructor
 
-void WifiManager::startWiFi()
+void WifiController::startWiFi()
 {
-
   Serial.println("\n\rConnecting");
-  while (wifiMulti.run() != WL_CONNECTED)
-  { // Esperar WiFi conectar
-    delay(250);
-    Serial.print(".");
-  };
+  WiFiManager wifiManager;
+
+  delay(500);
+  if (!wifiManager.autoConnect("Config-ESP-CRIAR")) {
+    Serial.println("Falha ao ligar. A reiniciar...");
+    ESP.restart();
+    delay(1000);
+  }
 
   Serial.print("\r\n");
   Serial.print("Connected to ");
@@ -28,7 +27,7 @@ void WifiManager::startWiFi()
   Serial.println("\r\n");
 };
 
-void WifiManager::startMDNS(String mdnsName)
+void WifiController::startMDNS(String mdnsName)
 { // Iniciar o mDNS com o nome desejado para a rede .local
 
   MDNS.begin(mdnsName); // começa a transmissão do nome
@@ -42,7 +41,7 @@ void WifiManager::startMDNS(String mdnsName)
   Serial.println(".local");
 };
 
-void WifiManager::updateMDNS()
+void WifiController::updateMDNS()
 {
   MDNS.update();
 };
