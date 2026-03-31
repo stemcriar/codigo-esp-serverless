@@ -1,3 +1,3 @@
-# Código ESP Stem Criar
+# Código ESP Stem Criar Serverless
 
-Este repositório armazena o **código completo da ESP01 dos Protótipos** desenvolvidos pelo time Stem Criar.
+Este repositório armazena o **código da ESP01 dos Protótipos** desenvolvidos pelo time Stem Criar. Esta versão **não** utiliza o [Servidor Stem Criar](https://github.com/stemcriar/servidor-prototipos).
